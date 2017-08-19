@@ -1,0 +1,27 @@
+
+<!doctype html>
+<html>
+    <head>
+        <title>The Office</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <div class='container'>
+            <h1 class='title text-primary'>BigOffice</h1>
+            <h3 class='subtitle'>Search every quote from NBC's <em>The Office</em></h3>
+                
+            <form class='searchbox' method='post' action='{{ url_for('search') }}'>
+                <input type='text' name='term' class='form-control' placeholder="Dunder Mifflin, Prison Mike, etc...">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+            
+            {% for row in rows %}
+            <blockquote>
+                    <p>"{{ row[4]|safe }}"</p>
+                    <footer><b>{{ row[3] | safe }}</b> in S{{ row[0] }}E{{ row[1] }} <cite>{{ row[2] | safe }}</cite></footer>
+            </blockquote>  
+            {% endfor %}
+        </div>
+    </body>
+</html>
